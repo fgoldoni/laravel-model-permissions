@@ -3,4 +3,7 @@ composer.lock
 /.phpunit.cache/
 /.idea/
 /.vscode/
+/.vscode/
 .php-cs-fixer.cache
+
+/build/
