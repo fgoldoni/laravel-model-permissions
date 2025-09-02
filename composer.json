@@ -1,0 +1,43 @@
+{
+    "name": "goldoni/laravel-model-permissions",
+    "description": "Model-scoped permission sync, base policies, role provisioning, module-aware discovery, and policy scaffolding with Super Admin override (Spatie-compatible).",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Goldoni",
+            "email": "fotsa.goldoni@yahoo.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^12.26"
+    },
+    "suggest": {
+        "spatie/laravel-permission": "Required to handle model permissions and roles (v6 recommended)",
+        "nwidart/laravel-modules": "Optional modules system support for auto-discovery and per-module policies",
+        "laravel/pint": "Run Pint to enforce PSR-12 automatically during development"
+    },
+    "autoload": {
+        "psr-4": {
+            "Goldoni\\ModelPermissions\\": "src/"
+        }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "phpstan/phpstan": "^2.1",
+        "nunomaduro/larastan": "^3.6"
+    },
+    "scripts": {
+        "lint": "vendor/bin/pint -v",
+        "lint:test": "vendor/bin/pint --test -v",
+        "stan": "vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon.dist"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Goldoni\\ModelPermissions\\ModelPermissionsServiceProvider"
+            ]
+        }
+    }
+}
