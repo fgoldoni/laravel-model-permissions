@@ -1,37 +1,45 @@
 {
     "name": "goldoni/laravel-model-permissions",
-    "description": "Model-scoped permission sync, base policies, role provisioning, module-aware discovery, and policy scaffolding with Super Admin override (Spatie-compatible).",
+    "description": "Model-scoped and global permission sync, base policies, role provisioning, and Super Admin override (Spatie-compatible).",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "permissions",
+        "authorization",
+        "policies",
+        "policy",
+        "gate",
+        "roles",
+        "spatie",
+        "laravel-permission",
+        "acl",
+        "model-permissions",
+        "global-permissions",
+        "nova"
+    ],
+    "homepage": "https://github.com/fgoldoni/laravel-model-permissions",
+    "support": {
+        "issues": "https://github.com/fgoldoni/laravel-model-permissions/issues",
+        "source": "https://github.com/fgoldoni/laravel-model-permissions"
+    },
     "authors": [
         {
             "name": "Goldoni",
+            "role": "Developer",
             "email": "fotsa.goldoni@yahoo.fr"
         }
     ],
     "require": {
-        "php": "^8.2",
-        "laravel/framework": "^12.0"
+        "php": "^8.2"
     },
     "suggest": {
-        "spatie/laravel-permission": "Required to handle model permissions and roles (v6 recommended)",
-        "nwidart/laravel-modules": "Optional modules system support for auto-discovery and per-module policies",
-        "laravel/pint": "Run Pint to enforce PSR-12 automatically during development"
+        "spatie/laravel-permission": "^6.0"
     },
     "autoload": {
         "psr-4": {
             "Goldoni\\ModelPermissions\\": "src/"
         }
-    },
-    "require-dev": {
-        "laravel/pint": "^1.24",
-        "phpstan/phpstan": "^2.1",
-        "nunomaduro/larastan": "^3.6"
-    },
-    "scripts": {
-        "lint": "vendor/bin/pint -v",
-        "lint:test": "vendor/bin/pint --test -v",
-        "stan": "vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon.dist"
     },
     "extra": {
         "laravel": {
@@ -39,5 +47,6 @@
                 "Goldoni\\ModelPermissions\\ModelPermissionsServiceProvider"
             ]
         }
-    }
+    },
+    "prefer-stable": true
 }

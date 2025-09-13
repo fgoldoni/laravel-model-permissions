@@ -5,87 +5,91 @@ declare(strict_types=1);
 namespace Goldoni\ModelPermissions\Policies;
 
 use Goldoni\ModelPermissions\Policies\Concerns\ChecksModelPermissions;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModelPolicy
 {
     use ChecksModelPermissions;
 
-    public const MODEL = null;
+    protected string $modelClass = '';
 
-    public function viewAny(Authenticatable $user): bool
+    public function viewAny(mixed $user): bool
     {
         return $this->can($user, 'viewAny');
     }
 
-    public function view(Authenticatable $user, Model $model): bool
+    public function view(mixed $user, Model $model): bool
     {
-        return $this->can($user, 'view');
+        return $this->can($user, 'view', $model);
     }
 
-    public function create(Authenticatable $user): bool
+    public function create(mixed $user): bool
     {
         return $this->can($user, 'create');
     }
 
-    public function update(Authenticatable $user, Model $model): bool
+    public function update(mixed $user, Model $model): bool
     {
-        return $this->can($user, 'update');
+        return $this->can($user, 'update', $model);
     }
 
-    public function delete(Authenticatable $user, Model $model): bool
+    public function delete(mixed $user, Model $model): bool
     {
-        return $this->can($user, 'delete');
+        return $this->can($user, 'delete', $model);
     }
 
-    public function restore(Authenticatable $user, Model $model): bool
+    public function restore(mixed $user, Model $model): bool
     {
-        return $this->can($user, 'restore');
+        return $this->can($user, 'restore', $model);
     }
 
-    public function forceDelete(Authenticatable $user, Model $model): bool
+    public function forceDelete(mixed $user, Model $model): bool
     {
-        return $this->can($user, 'forceDelete');
+        return $this->can($user, 'forceDelete', $model);
     }
 
-    public function replicate(Authenticatable $user, Model $model): bool
-    {
-        return $this->can($user, 'replicate');
-    }
-
-    public function deleteAny(Authenticatable $user): bool
+    public function deleteAny(mixed $user): bool
     {
         return $this->can($user, 'deleteAny');
     }
 
-    public function forceDeleteAny(Authenticatable $user): bool
-    {
-        return $this->can($user, 'forceDeleteAny');
-    }
-
-    public function restoreAny(Authenticatable $user): bool
+    public function restoreAny(mixed $user): bool
     {
         return $this->can($user, 'restoreAny');
     }
 
-    public function attach(Authenticatable $user): bool
+    public function forceDeleteAny(mixed $user): bool
     {
-        return $this->can($user, 'attach');
+        return $this->can($user, 'forceDeleteAny');
     }
 
-    public function attachAny(Authenticatable $user): bool
+    public function replicate(mixed $user, Model $model): bool
+    {
+        return $this->can($user, 'replicate', $model);
+    }
+
+    public function reorder(mixed $user): bool
+    {
+        return $this->can($user, 'reorder');
+    }
+
+    public function attach(mixed $user, Model $model): bool
+    {
+        return $this->can($user, 'attach', $model);
+    }
+
+    public function detach(mixed $user, Model $model): bool
+    {
+        return $this->can($user, 'detach', $model);
+    }
+
+    public function attachAny(mixed $user): bool
     {
         return $this->can($user, 'attachAny');
     }
 
-    public function detach(Authenticatable $user): bool
+    public function detachAny(mixed $user): bool
     {
-        return $this->can($user, 'detach');
-    }
-
-    public function add(Authenticatable $user): bool
-    {
-        return $this->can($user, 'add');
+        return $this->can($user, 'detachAny');
     }
 }
