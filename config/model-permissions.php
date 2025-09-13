@@ -20,12 +20,6 @@ return [
     ],
     'models' => [
         User::class,
-        Event::class,
-        Order::class,
-        Ticket::class,
-        Artist::class,
-        Transaction::class,
-        Video::class,
     ],
     'abilities' => [
         'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny',
@@ -33,7 +27,7 @@ return [
         'replicate', 'reorder', 'attach', 'attachAny', 'detach', 'detachAny',
     ],
     'global_permissions' => [
-        'impersonate', 'accessAdmin', 'viewReports',
+        'impersonate',
     ],
     'role_ability_map' => [
         'Super Admin' => ['*'],
@@ -43,22 +37,13 @@ return [
     'role_model_ability_map' => [
         'Manager' => [
             User::class        => ['viewAny', 'view', 'update', 'delete', 'deleteAny'],
-            Event::class       => ['*'],
-            Order::class       => ['*'],
-            Ticket::class      => ['*'],
-            Artist::class      => ['viewAny', 'view', 'create', 'update', 'attach', 'detach'],
-            Transaction::class => ['viewAny', 'view', 'create', 'update'],
-            Video::class       => ['viewAny', 'view', 'create', 'update'],
         ],
         'User' => [
-            Ticket::class => ['viewAny', 'view', 'create'],
-            Order::class  => ['viewAny', 'view'],
-            Event::class  => ['viewAny', 'view'],
         ],
     ],
     'role_global_permissions' => [
         'Super Admin' => ['*'],
-        'Manager'     => ['viewReports', 'accessAdmin'],
+        'Manager'     => ['impersonate'],
         'User'        => [],
     ],
 ];
