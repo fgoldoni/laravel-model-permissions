@@ -2,13 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Artist;
-use App\Models\Event;
-use App\Models\Order;
-use App\Models\Ticket;
-use App\Models\Transaction;
 use App\Models\User;
-use App\Models\Video;
 
 return [
     'guard_name'       => 'web',
@@ -16,6 +10,7 @@ return [
     'roles'            => [
         'super_admin' => 'Super Admin',
         'manager'     => 'Manager',
+        'seller'      => 'Seller',
         'user'        => 'User',
     ],
     'models' => [
@@ -32,10 +27,14 @@ return [
     'role_ability_map' => [
         'Super Admin' => ['*'],
         'Manager'     => ['viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore', 'replicate', 'reorder', 'attach', 'attachAny', 'detach', 'detachAny'],
+        'Seller'      => ['viewAny', 'view', 'create', 'update', 'delete', 'deleteAny'],
         'User'        => ['viewAny', 'view', 'create', 'update'],
     ],
     'role_model_ability_map' => [
         'Manager' => [
+            User::class        => ['viewAny', 'view', 'update', 'delete', 'deleteAny'],
+        ],
+        'Seller' => [
             User::class        => ['viewAny', 'view', 'update', 'delete', 'deleteAny'],
         ],
         'User' => [
@@ -44,6 +43,7 @@ return [
     'role_global_permissions' => [
         'Super Admin' => ['*'],
         'Manager'     => ['impersonate'],
+        'Seller'      => [],
         'User'        => [],
     ],
 ];
