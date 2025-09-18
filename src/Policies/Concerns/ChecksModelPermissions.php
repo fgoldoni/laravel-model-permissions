@@ -5,34 +5,26 @@ declare(strict_types=1);
 namespace Goldoni\ModelPermissions\Policies\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Throwable;
 
 trait ChecksModelPermissions
 {
-    protected function can(mixed $user, string $ability, string|Model|null $modelOrClass = null): bool
+    protected function hasPermissionTo(Model $model, string $ability, string|Model|null $modelOrClass = null): bool
     {
-        $modelClass     = $this->resolveModelClass($modelOrClass);
-        $permissionName = $this->buildPermissionName($modelClass, $ability);
-        $guardName      = config('model-permissions.guard_name', 'web');
+        $modelClass = $this->resolveModelClass($modelOrClass);
+        $permission = $this->buildPermissionName($modelClass, $ability);
+        $guard = (string) config('auth.defaults.guard', 'web');
 
-        if (method_exists($user, 'hasPermissionTo')) {
-            try {
-                return (bool) $user->hasPermissionTo($permissionName, $guardName);
-            } catch (Throwable) {
-            }
+        if (!method_exists($model, 'hasPermissionTo')) {
+            return false;
         }
 
-        if (method_exists($user, 'can')) {
-            return (bool) $user->can($permissionName, [$guardName]);
-        }
-
-        return false;
+        return (bool) $model->hasPermissionTo($permission, $guard);
     }
 
     protected function buildPermissionName(string $modelClass, string $ability): string
     {
-        $modelBase = class_basename($modelClass);
-        return lcfirst($modelBase) . ucfirst($ability);
+        $base = class_basename($modelClass);
+        return lcfirst($base) . ucfirst($ability);
     }
 
     protected function resolveModelClass(string|Model|null $modelOrClass = null): string
@@ -49,16 +41,16 @@ trait ChecksModelPermissions
             return $this->modelClass;
         }
 
-        $policyClass = static::class;
-        $base        = preg_replace('/Policy$/', '', class_basename($policyClass)) ?? '';
+        $policy = static::class;
+        $base = preg_replace('/Policy$/', '', class_basename($policy)) ?: '';
 
         if ($base !== '') {
-            $guessed = 'App\Models\\' . $base;
-            if (class_exists($guessed)) {
-                return $guessed;
+            $guess = 'App\\Models\\' . $base;
+            if (class_exists($guess)) {
+                return $guess;
             }
         }
 
-        return $policyClass;
+        return $policy;
     }
 }

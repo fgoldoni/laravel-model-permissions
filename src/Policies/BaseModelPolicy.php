@@ -13,83 +13,83 @@ abstract class BaseModelPolicy
 
     protected string $modelClass = '';
 
-    public function viewAny(mixed $user): bool
+    public function viewAny(Model $model): bool
     {
-        return $this->can($user, 'viewAny');
+        return $this->hasPermissionTo($model, 'viewAny');
     }
 
-    public function view(mixed $user, Model $model): bool
+    public function view(Model $user, Model $model): bool
     {
-        return $this->can($user, 'view', $model);
+        return $this->hasPermissionTo($user, 'view', $model);
     }
 
-    public function create(mixed $user): bool
+    public function create(Model $model): bool
     {
-        return $this->can($user, 'create');
+        return $this->hasPermissionTo($model, 'create');
     }
 
-    public function update(mixed $user, Model $model): bool
+    public function update(Model $user, Model $model): bool
     {
-        return $this->can($user, 'update', $model);
+        return $this->hasPermissionTo($user, 'update', $model);
     }
 
-    public function delete(mixed $user, Model $model): bool
+    public function delete(Model $user, Model $model): bool
     {
-        return $this->can($user, 'delete', $model);
+        return $this->hasPermissionTo($user, 'delete', $model);
     }
 
-    public function restore(mixed $user, Model $model): bool
+    public function restore(Model $user, Model $model): bool
     {
-        return $this->can($user, 'restore', $model);
+        return $this->hasPermissionTo($user, 'restore', $model);
     }
 
-    public function forceDelete(mixed $user, Model $model): bool
+    public function forceDelete(Model $user, Model $model): bool
     {
-        return $this->can($user, 'forceDelete', $model);
+        return $this->hasPermissionTo($user, 'forceDelete', $model);
     }
 
-    public function deleteAny(mixed $user): bool
+    public function deleteAny(Model $model): bool
     {
-        return $this->can($user, 'deleteAny');
+        return $this->hasPermissionTo($model, 'deleteAny');
     }
 
-    public function restoreAny(mixed $user): bool
+    public function restoreAny(Model $model): bool
     {
-        return $this->can($user, 'restoreAny');
+        return $this->hasPermissionTo($model, 'restoreAny');
     }
 
-    public function forceDeleteAny(mixed $user): bool
+    public function forceDeleteAny(Model $model): bool
     {
-        return $this->can($user, 'forceDeleteAny');
+        return $this->hasPermissionTo($model, 'forceDeleteAny');
     }
 
-    public function replicate(mixed $user, Model $model): bool
+    public function replicate(Model $user, Model $model): bool
     {
-        return $this->can($user, 'replicate', $model);
+        return $this->hasPermissionTo($user, 'replicate', $model);
     }
 
-    public function reorder(mixed $user): bool
+    public function reorder(Model $model): bool
     {
-        return $this->can($user, 'reorder');
+        return $this->hasPermissionTo($model, 'reorder');
     }
 
-    public function attach(mixed $user, Model $model): bool
+    public function attach(Model $user, Model $model): bool
     {
-        return $this->can($user, 'attach', $model);
+        return $this->hasPermissionTo($user, 'attach', $model);
     }
 
-    public function detach(mixed $user, Model $model): bool
+    public function detach(Model $user, Model $model): bool
     {
-        return $this->can($user, 'detach', $model);
+        return $this->hasPermissionTo($user, 'detach', $model);
     }
 
-    public function attachAny(mixed $user): bool
+    public function attachAny(Model $model): bool
     {
-        return $this->can($user, 'attachAny');
+        return $this->hasPermissionTo($model, 'attachAny');
     }
 
-    public function detachAny(mixed $user): bool
+    public function detachAny(Model $model): bool
     {
-        return $this->can($user, 'detachAny');
+        return $this->hasPermissionTo($model, 'detachAny');
     }
 }

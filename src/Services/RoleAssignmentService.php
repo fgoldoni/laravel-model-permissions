@@ -59,6 +59,7 @@ class RoleAssignmentService
         bool $dryRun,
         bool $reset
     ): int {
+
         $this->authorizationRepository->ensureRole($roleName, $guardName);
 
         if ($dryRun) {
