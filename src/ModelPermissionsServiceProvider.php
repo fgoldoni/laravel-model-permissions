@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Goldoni\ModelPermissions;
 
+use Override;
 use Goldoni\ModelPermissions\Commands\SyncPermissionsCommand;
 use Goldoni\ModelPermissions\Contracts\AuthorizationRepositoryInterface;
 use Goldoni\ModelPermissions\Contracts\PermissionNamerInterface;
@@ -22,6 +23,7 @@ use Throwable;
 
 class ModelPermissionsServiceProvider extends ServiceProvider
 {
+    #[Override]
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/model-permissions.php', 'model-permissions');

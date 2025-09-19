@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Goldoni\ModelPermissions\Events;
 
-final class ModelPermissionsHealthCheckPassed
+final readonly class ModelPermissionsHealthCheckPassed
 {
-    public function __construct(public readonly array $checks)
+    public function __construct(public array $checks)
     {
     }
 }
