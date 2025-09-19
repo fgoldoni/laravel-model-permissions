@@ -8,18 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 
 trait ChecksModelPermissions
 {
+    protected function resolveGuardName(): string
+    {
+        $guard = (string) config('model-permissions.guard_name', '');
+        return $guard !== '' ? $guard : (string) config('auth.defaults.guard', 'web');
+    }
+
     protected function hasPermissionTo(Model $model, string $ability, string|Model|null $modelOrClass = null): bool
     {
         $modelClass = $this->resolveModelClass($modelOrClass);
         $permission = $this->buildPermissionName($modelClass, $ability);
-        $guard = (string) config('auth.defaults.guard', 'web');
+        $guard = $this->resolveGuardName();
 
-        if (!method_exists($model, 'hasPermissionTo')) {
+        if (! method_exists($model, 'hasPermissionTo')) {
             return false;
         }
 
         return (bool) $model->hasPermissionTo($permission, $guard);
     }
+
 
     protected function buildPermissionName(string $modelClass, string $ability): string
     {
