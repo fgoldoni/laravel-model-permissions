@@ -11,6 +11,7 @@ trait ChecksModelPermissions
     protected function resolveGuardName(): string
     {
         $guard = (string) config('model-permissions.guard_name', '');
+
         return $guard !== '' ? $guard : (string) config('auth.defaults.guard', 'web');
     }
 
@@ -18,7 +19,7 @@ trait ChecksModelPermissions
     {
         $modelClass = $this->resolveModelClass($modelOrClass);
         $permission = $this->buildPermissionName($modelClass, $ability);
-        $guard = $this->resolveGuardName();
+        $guard      = $this->resolveGuardName();
 
         if (! method_exists($model, 'hasPermissionTo')) {
             return false;
@@ -31,6 +32,7 @@ trait ChecksModelPermissions
     protected function buildPermissionName(string $modelClass, string $ability): string
     {
         $base = class_basename($modelClass);
+
         return lcfirst($base) . ucfirst($ability);
     }
 
@@ -49,10 +51,11 @@ trait ChecksModelPermissions
         }
 
         $policy = static::class;
-        $base = preg_replace('/Policy$/', '', class_basename($policy)) ?: '';
+        $base   = preg_replace('/Policy$/', '', class_basename($policy)) ?: '';
 
         if ($base !== '') {
             $guess = 'App\\Models\\' . $base;
+
             if (class_exists($guess)) {
                 return $guess;
             }

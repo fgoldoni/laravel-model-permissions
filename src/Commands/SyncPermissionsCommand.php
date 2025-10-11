@@ -44,11 +44,13 @@ class SyncPermissionsCommand extends Command
 
         if ($models === [] && $globals === []) {
             $this->warn('Nothing to synchronize.');
+
             return self::SUCCESS;
         }
 
         if (!$this->authorizationRepository->isAvailable() && !$dry) {
             $this->error('spatie/laravel-permission is not available.');
+
             return self::FAILURE;
         }
 

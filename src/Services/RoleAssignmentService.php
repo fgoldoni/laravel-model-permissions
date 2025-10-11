@@ -42,6 +42,7 @@ class RoleAssignmentService
         }
 
         $globalsForRole = $roleGlobalPermissionsMap[$roleName] ?? [];
+
         if ($globalsForRole === ['*']) {
             $names = array_merge($names, $globalPermissions);
         } elseif (!empty($globalsForRole)) {

@@ -48,6 +48,7 @@ class SyncPermissionsService
 
         foreach ($allPermissionNames as $allPermissionName) {
             $createdNow = $this->authorizationRepository->ensurePermission($allPermissionName, $guardName);
+
             if ($createdNow) {
                 ++$created;
             } else {

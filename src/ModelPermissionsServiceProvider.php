@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Goldoni\ModelPermissions;
 
-use Override;
 use Goldoni\ModelPermissions\Commands\SyncPermissionsCommand;
 use Goldoni\ModelPermissions\Contracts\AuthorizationRepositoryInterface;
 use Goldoni\ModelPermissions\Contracts\PermissionNamerInterface;
@@ -16,6 +15,7 @@ use Goldoni\ModelPermissions\Support\ModelPermissionNamer;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Override;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
